@@ -1,0 +1,60 @@
+name: build
+on:
+    push:
+jobs:
+    build:
+        runs-on: ubuntu-20.04
+        strategy:
+            matrix:
+                node-version: [16]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7.26.1
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "pnpm"
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - run: SKIP_ENV_VALIDATION=1 pnpm run build
+
+    lint:
+        runs-on: ubuntu-20.04
+        strategy:
+            matrix:
+                node-version: [16]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7.26.1
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "pnpm"
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - run: SKIP_ENV_VALIDATION=1 pnpm run lint
+
+    lint-format:
+        runs-on: ubuntu-20.04
+        strategy:
+            matrix:
+                node-version: [16]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7.26.1
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "pnpm"
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - run: SKIP_ENV_VALIDATION=1 pnpm run lint:format
