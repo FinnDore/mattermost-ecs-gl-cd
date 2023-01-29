@@ -18,11 +18,10 @@ const bindings = (
                         label: "restart",
                         description: "Restarts an ecs service",
                         form: {
-                            title: "Dynamic field test",
+                            title: "Select a service to restart",
                             icon: "icon-info.png",
-
                             submit: {
-                                path: "/dynamic-form-submit",
+                                path: "/api/mattermost/restart-service",
                             },
                             fields: [
                                 {

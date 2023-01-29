@@ -1,11 +1,7 @@
 import { env } from "@/env/server.mjs";
 import { to } from "@/utils/to";
-import { commandScore } from "@/_functions/comand-score";
-import {
-    ECSClient,
-    ListServicesCommand,
-    UpdateServiceCommand,
-} from "@aws-sdk/client-ecs";
+import { commandScore } from "@/_functions/command-score";
+import { ECSClient, ListServicesCommand } from "@aws-sdk/client-ecs";
 import type {
     AppCallResponse,
     AppLookupResponse,
@@ -55,7 +51,7 @@ const autoComplete = async (
     res.json({
         type: "ok",
         data: {
-            items: sorted.map(x => ({ label: x.arn, value: x.displayName })),
+            items: sorted.map(x => ({ label: x.displayName, value: x.arn })),
         },
     });
 };
@@ -89,29 +85,6 @@ async function getServices() {
                 if (!res.nextToken) break;
             }
             return services;
-        })()
-    );
-}
-
-async function forceNewDeployment({
-    cluster,
-    serviceName,
-    region,
-}: {
-    cluster: string;
-    serviceName: string;
-    region: string;
-}) {
-    const client = new ECSClient({ region });
-    return await to(
-        (async () => {
-            const command = new UpdateServiceCommand({
-                cluster,
-                service: serviceName,
-                forceNewDeployment: true,
-            });
-
-            return await client.send(command);
         })()
     );
 }
