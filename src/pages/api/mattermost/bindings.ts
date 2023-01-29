@@ -22,12 +22,16 @@ const bindings = (
                             icon: "icon-info.png",
                             submit: {
                                 path: "/api/mattermost/restart-service",
+                                expand: {
+                                    channel: "all",
+                                },
                             },
                             fields: [
                                 {
                                     name: "service",
                                     type: "dynamic_select",
                                     label: "Service",
+                                    is_required: true,
                                     lookup: {
                                         path: "/api/mattermost/restart-service/auto-complete",
                                     },

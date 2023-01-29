@@ -30,12 +30,10 @@ const autoComplete = async (
 
     const { query } = parseResult.data;
     // Swr this only once we have a list of services
-    if (updateTime < new Date()) {
-        if (currentServices === null) {
-            await updateServices();
-        } else {
-            void updateServices();
-        }
+    if (currentServices === null) {
+        await updateServices();
+    } else if (updateTime < new Date()) {
+        void updateServices();
     }
 
     const services = currentServices ?? [];
@@ -46,7 +44,7 @@ const autoComplete = async (
     );
 
     const sorted = services.sort(
-        (a, b) => (scores[a.arn] ?? 0) - (scores[b.arn] ?? 0)
+        (a, b) => (scores[b.arn] ?? 0) - (scores[a.arn] ?? 0)
     );
     res.json({
         type: "ok",
