@@ -12,6 +12,7 @@
         "start": "cross-env NODE_ENV=production node dist/server.js"
     },
     "dependencies": {
+        "@aws-sdk/client-ecs": "^3.259.0",
         "@mattermost/client": "^7.4.0",
         "@next-auth/prisma-adapter": "^1.0.5",
         "@prisma/client": "^4.8.0",

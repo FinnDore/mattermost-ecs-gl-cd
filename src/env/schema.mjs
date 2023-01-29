@@ -24,6 +24,11 @@ export const serverSchema = z.object({
     MATTERMOST_URL: z.string().url(),
     BASE_URL: z.string().url(),
     JWT_SECRET: z.string().min(1),
+
+    AWS_ACCESS_KEY_ID: z.string(),
+    AWS_SECRET_ACCESS_KEY: z.string(),
+    AWS_CLUSTER_ID: z.string(),
+    AWS_REGION: z.string(),
 });
 
 /**
@@ -41,6 +46,10 @@ export const serverEnv = {
     MATTERMOST_URL: process.env.MATTERMOST_URL,
     BASE_URL: process.env.BASE_URL,
     JWT_SECRET: process.env.JWT_SECRET,
+    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+    AWS_CLUSTER_ID: process.env.AWS_CLUSTER_ID,
+    AWS_REGION: process.env.AWS_REGION,
 };
 
 /**

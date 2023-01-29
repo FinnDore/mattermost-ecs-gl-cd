@@ -19,8 +19,8 @@ const config = {
             destination: "/public/:path*",
         },
         {
-            source: "/bindings/:path*",
-            destination: "/api/mattermost/:path*",
+            source: "/bindings",
+            destination: "/api/mattermost/bindings",
         },
     ],
 };
