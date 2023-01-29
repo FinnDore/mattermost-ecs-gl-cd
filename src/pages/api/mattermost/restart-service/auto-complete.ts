@@ -45,7 +45,7 @@ const autoComplete = async (
     const services = currentServices ?? [];
     const scores: Record<string, number> = {};
     services.forEach(
-        (service) =>
+        service =>
             (scores[service.arn] = commandScore(query, service.displayName))
     );
 
@@ -55,7 +55,7 @@ const autoComplete = async (
     res.json({
         type: "ok",
         data: {
-            items: sorted.map((x) => ({ label: x.arn, value: x.displayName })),
+            items: sorted.map(x => ({ label: x.arn, value: x.displayName })),
         },
     });
 };
@@ -66,7 +66,7 @@ async function updateServices() {
     const [services, error] = await getServices();
     if (error)
         return console.error("Failed to fetch the list of ecs services", error);
-    currentServices = services.map((service) => ({
+    currentServices = services.map(service => ({
         displayName: service.split("/").pop() ?? "Unknown Service",
         arn: service,
     }));

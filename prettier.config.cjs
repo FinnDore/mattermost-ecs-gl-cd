@@ -1,6 +1,6 @@
 /** @type {import("prettier").Config} */
 module.exports = {
-    arrowParensL: "avoid",
+    arrowParens: "avoid",
     tabWidth: 4,
     plugins: [require.resolve("prettier-plugin-tailwindcss")],
 };
